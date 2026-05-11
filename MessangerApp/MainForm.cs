@@ -17,10 +17,8 @@ namespace MessengerApp
         {
             InitializeComponent();
 
-            // Указываем, что в ListBox будем отображать свойство Info объектов
             lstChat.DisplayMember = "Info";
 
-            // Добавляем ботов в ComboBox
             cmbBot.Items.Add("ChatBot");
             cmbBot.Items.Add("NewsBot");
             cmbBot.Items.Add("AssistantBot");
@@ -43,26 +41,21 @@ namespace MessengerApp
         {
             string userText = txtMessage.Text;
 
-            // Singleton
             var manager = WebSocketManager.Instance();
             manager.AddConnection("User");
 
-            // Builder
             IMessageBuilder builder = new MessageBuilder();
             MessageDirector director = new MessageDirector();
             director.BuildText(builder, userText);
 
             var complexMessage = builder.GetResult();
 
-            // Factory Method
             MessageCreator creator = new TextCreator();
             IMessage message = creator.CreateMessage(userText);
 
-            // Prototype
             prototype = new TextMsg("User", message.Send());
             lstChat.Items.Add(prototype);
 
-            // Abstract Factory
             var handler = factory.CreateHandler();
             var responder = factory.CreateResponder();
 
@@ -80,12 +73,10 @@ namespace MessengerApp
                 return;
             }
 
-            // Клонируем объект и добавляем его в список
             IMessagePrototype clonedMessage = prototype.Clone();
             lstChat.Items.Add(clonedMessage);
         }
 
-        // Проверка работы Singleton
         private void btnCheckSingleton_Click(object sender, EventArgs e)
         {
             var m1 = WebSocketManager.Instance();
@@ -93,11 +84,10 @@ namespace MessengerApp
 
             if (m1 == m2)
             {
-                lstChat.Items.Add("Singleton работает: один экземпляр");
+                lstChat.Items.Add("Singleton Г°Г ГЎГ®ГІГ ГҐГІ: Г®Г¤ГЁГ­ ГЅГЄГ§ГҐГ¬ГЇГ«ГїГ°");
             }
         }
 
-        // Получение списка подключений из Singleton
         private void btnConnections_Click(object sender, EventArgs e)
         {
             var manager = WebSocketManager.Instance();
@@ -108,7 +98,6 @@ namespace MessengerApp
             }
         }
 
-        // IMAGE MESSAGE
         private void btnImage_Click(object sender, EventArgs e)
         {
             IMessageBuilder builder = new MessageBuilder();
@@ -121,7 +110,6 @@ namespace MessengerApp
             lstChat.Items.Add("IMAGE: " + complexMessage);
         }
 
-        // VIDEO / ATTACHMENT MESSAGE
         private void btnVideo_Click(object sender, EventArgs e)
         {
             IMessageBuilder builder = new MessageBuilder();
