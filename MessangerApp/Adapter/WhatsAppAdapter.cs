@@ -19,7 +19,7 @@ namespace MessangerApp.Adapter
 
             public void SendMessage(string message)
             {
-                adaptee.SendWhatsAppMessage(message); // адаптация
+                adaptee.SendWhatsAppMessage(message);
             }
         }
     }
