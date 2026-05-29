@@ -17,7 +17,7 @@ namespace MessangerApp.Adapter
 
         public void SendMessage(string message)
         {
-            adaptee.SendTelegram(message); // адаптация
+            adaptee.SendTelegram(message);
         }
     }
 }
